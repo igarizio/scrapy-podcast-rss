@@ -25,7 +25,6 @@ setuptools.setup(
         's3_storage': ["boto3"],
         'tests': ["pytest==5.2.4"]
     },
-    tests_require=["pytest==5.2.4"],
     python_require='>=3.6',
     classifiers=[
         "Programming Language :: Python :: 3",
