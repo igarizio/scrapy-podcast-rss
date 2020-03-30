@@ -1,26 +1,29 @@
-from os.path import dirname, join
+import os
+
 import setuptools
 
-with open("README.md", "r") as fh:
-    long_description = fh.read()
+here = os.path.abspath(os.path.dirname(__file__))
 
-with open(join(dirname(__file__), 'scrapy_podcast_rss/VERSION'), 'rb') as f:
-    version = f.read().decode('ascii').strip()
 
-with open('requirements.txt') as f:
-    requirements = f.read().splitlines()
+def read(file_name):
+    return open(os.path.join(here, file_name)).read()
+
+
+about = {}
+with open(os.path.join(here, 'scrapy_podcast_rss', '__version__.py'), 'r') as f:
+    exec(f.read(), about)
 
 setuptools.setup(
     name="scrapy-podcast-rss",
-    version=version,
-    author="Iacopo Garizio",
-    author_email="info@iacopogarizio.com",
-    description="Scrapy pipeline and items to create and store RSS feeds for podcasts",
-    long_description=long_description,
+    version=about["__version__"],
+    author=about["__author__"],
+    author_email=about["__author_email__"],
+    description=about["__description__"],
+    long_description=read("README.md"),
     long_description_content_type="text/markdown",
     url="https://github.com/igarizio/scrapy-podcast-rss",
-    packages=setuptools.find_packages('scrapy_podcast_rss'),
-    install_requires=requirements,
+    packages=['scrapy_podcast_rss'],
+    install_requires=["Scrapy>=1.7.3", "feedgen==0.9.0"],
     extras_require={
         's3_storage': ["boto3"],
         'tests': ["pytest==5.2.4"]
