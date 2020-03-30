@@ -11,8 +11,8 @@ $ pip install scrapy-podcast-rss
 ```
 
 ## Configuration
-1. You need to define an ``OUTPUT_URI`` pointing to where you want to store the
-file, For example:
+1. You need to define ``OUTPUT_URI`` in your ``settings.py`` file, this will
+determine where your feed will be stored. For example:
     ```python
     OUTPUT_URI = './my-podcast.xml'  # Local file.
     OUTPUT_URI = 's3://my-bucket/my-podcast.xml'  # S3 bucket (read note on S3 storage).
@@ -47,7 +47,7 @@ the same names):
     * ``guid``: Unique identifier of the episode.
     
 ## Example
-You can find a minimal example of a spider using this package in this repo 
+You can find a minimal example of a spider using this package here: 
 [scrapy-podcast-rss-example](https://github.com/igarizio/scrapy-podcast-rss-example).
 
 ### Note on using S3 as storage
