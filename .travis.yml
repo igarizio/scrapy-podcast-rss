@@ -8,7 +8,7 @@ before_install:
   - pip install -U pytest
   - pip install codecov
 install:
-  - pip install ".[s3_storage]"
+  - pip install ".[s3_storage,tests]"
 script: pytest
 after_success:
   - codecov

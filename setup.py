@@ -22,12 +22,14 @@ setuptools.setup(
     packages=setuptools.find_packages('scrapy_podcast_rss'),
     install_requires=requirements,
     extras_require={
-        's3_storage':  ["boto3"]
+        's3_storage': ["boto3"],
+        'tests': ["pytest==5.2.4"]
     },
+    tests_require=["pytest==5.2.4"],
+    python_require='>=3.6',
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    python_requires='>=3.6',
 )
