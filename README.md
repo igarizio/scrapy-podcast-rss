@@ -1,4 +1,5 @@
 # scrapy-podcast-rss
+[![Build Status](https://travis-ci.org/igarizio/scrapy-podcast-rss.svg?branch=master)](https://travis-ci.org/igarizio/scrapy-podcast-rss)  
 This package provides a Scrapy pipeline and items to generate a podcast RSS feed 
 from scraped information. It also allows to save the content locally or in an S3 
 bucket. You can then point your podcast player to the URL of the file and 
