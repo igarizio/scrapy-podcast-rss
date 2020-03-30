@@ -1,4 +1,4 @@
-"""This module defines a pipeline to create rss feeds.
+"""This module defines a pipeline to create RSS feeds.
 
 The module takes PodcastEpisodeItems and PodcastDataItems and exports them using
 PodcastToS3ItemExporter or PodcastToFileItemExporter depending on the URI defined.

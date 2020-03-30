@@ -15,12 +15,15 @@ setuptools.setup(
     version=version,
     author="Iacopo Garizio",
     author_email="info@iacopogarizio.com",
-    description="Scrapy pipeline and items to create and store podcasts rss files",
+    description="Scrapy pipeline and items to create and store RSS feeds for podcasts",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/igarizio/scrapy-podcast-rss",
     packages=setuptools.find_packages('scrapy_podcast_rss'),
     install_requires=requirements,
+    extras_require={
+        's3_storage':  ["boto3"]
+    },
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",

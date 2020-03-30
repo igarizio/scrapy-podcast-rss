@@ -1,6 +1,6 @@
 # scrapy-podcast-rss
-This package provides a Scrapy pipeline and items to create podcast RSS files 
-from scraped information. It also allows to save the file locally or in an S3 
+This package provides a Scrapy pipeline and items to generate a podcast RSS feed 
+from scraped information. It also allows to save the content locally or in an S3 
 bucket. You can then point your podcast player to the URL of the file and 
 listen to its content.
 
@@ -15,7 +15,7 @@ $ pip install scrapy-podcast-rss
 file, For example:
     ```python
     OUTPUT_URI = './my-podcast.xml'  # Local file.
-    OUTPUT_URI = 's3://my-bucket/my-podcast.xml'  # S3 bucket.
+    OUTPUT_URI = 's3://my-bucket/my-podcast.xml'  # S3 bucket (read note on S3 storage).
     ```
 2. Add ``PodcastPipeline`` in ``ITEM_PIPELINES`` in your ``settings.py`` file:
     ```python
@@ -51,6 +51,10 @@ You can find a minimal example of a spider using this package in this repo
 [scrapy-podcast-rss-example](https://github.com/igarizio/scrapy-podcast-rss-example).
 
 ### Note on using S3 as storage
-To use S3 locations you will need to install install ```boto3``` 
-([quickstart guide](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/quickstart.html)).
-Once installed you will also need to have your credentials configured.
+To use S3 storage locations, you can install scrapy-podcast-rss by doing:
+```console
+$ pip install scrapy-podcast-rss[s3_storage]
+```
+This will simply include ``boto3`` in the dependencies.  
+Once installed, you will need to have your credentials configured
+([boto3 quickstart guide](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/quickstart.html)).

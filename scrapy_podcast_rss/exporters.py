@@ -1,4 +1,4 @@
-"""Custom exporters that generate and save rss feeds.
+"""Custom exporters that generate and save RSS feeds.
 """
 import abc
 from urllib.parse import urlparse
@@ -13,9 +13,9 @@ except ImportError:
 
 
 class PodcastBaseItemExporter(BaseItemExporter, metaclass=abc.ABCMeta):
-    """Item exporter base class designed to generate rss feeds.
+    """Item exporter base class designed to generate RSS feeds.
 
-    The class uses feedgen to generate the rss content.
+    The class uses feedgen to generate the RSS content.
     Subclasses are expected to implement the method save_to_storage.
     """
 
@@ -43,7 +43,7 @@ class PodcastBaseItemExporter(BaseItemExporter, metaclass=abc.ABCMeta):
         self.fg._FeedGenerator__rss_lastBuildDate = None  # This prevents Plex from confusing pubDate with lastBuildDate
 
     def export_item(self, item):
-        """Adds a new entry to the rss feed.
+        """Adds a new entry to the RSS feed.
 
         Args:
             item: A PodcastEpisodeItem.
@@ -63,7 +63,7 @@ class PodcastBaseItemExporter(BaseItemExporter, metaclass=abc.ABCMeta):
         fe.guid(guid)
 
     def finish_exporting(self):
-        """Generates the rss content and saves it to a file"""
+        """Generates the RSS content and saves it to a file"""
         rss_content = self.fg.rss_str(pretty=True)
         self.save_to_storage(rss_content)
 
@@ -75,7 +75,7 @@ class PodcastBaseItemExporter(BaseItemExporter, metaclass=abc.ABCMeta):
 
 
 class PodcastToFileItemExporter(PodcastBaseItemExporter):
-    """Exporter that saves the rss feed to a local file."""
+    """Exporter that saves the RSS feed to a local file."""
 
     def save_to_storage(self, content):
         """Saves the content to a local file."""
@@ -85,7 +85,7 @@ class PodcastToFileItemExporter(PodcastBaseItemExporter):
 
 
 class PodcastToS3ItemExporter(PodcastBaseItemExporter):
-    """Exporter that saves the rss feed to an S3 bucket
+    """Exporter that saves the RSS feed to an S3 bucket
 
     NOTE 1: This exporter needs boto3 in order to operate.
     NOTE 2: By default, the file is configured as PUBLIC-READ.
