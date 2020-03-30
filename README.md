@@ -24,7 +24,7 @@ file, For example:
     }
     ```
    
-## Usage:
+## Usage
 scrapy-podcast-rss defines two special items:
 * ``PodcastDataItem``: Stores information about the podcast.
 * ``PodcastEpisodeItem``: Stores information about each episode of the podcast.
@@ -46,6 +46,11 @@ the same names):
     * ``audio_url``: URL of the audio.
     * ``guid``: Unique identifier of the episode.
     
-## Example:
+## Example
 You can find a minimal example of a spider using this package in this repo 
 [scrapy-podcast-rss-example](https://github.com/igarizio/scrapy-podcast-rss-example).
+
+### Note on using S3 as storage
+To use S3 locations you will need to install install ```boto3``` 
+([quickstart guide](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/quickstart.html)).
+Once installed you will also need to have your credentials configured.
