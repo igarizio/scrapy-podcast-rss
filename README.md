@@ -49,7 +49,43 @@ the same names):
     
 ## Example
 You can find a minimal example of a spider using this package here: 
-[scrapy-podcast-rss-example](https://github.com/igarizio/scrapy-podcast-rss-example).
+[scrapy-podcast-rss-example](https://github.com/igarizio/scrapy-podcast-rss-example).  
+You can also find an example of the package being used in an AWS Lambda function here: [scrapy-podcast-rss-serverless](https://github.com/igarizio/scrapy-podcast-rss-serverless).
+
+### Spider example:
+```python
+import datetime
+import scrapy
+import pytz
+from scrapy_podcast_rss import PodcastEpisodeItem, PodcastDataItem
+
+
+class SimpleSpider(scrapy.Spider):
+    name = "simple_spider"
+    start_urls = ['http://example.com/']
+    custom_settings = {
+        'OUTPUT_URI': './my-podcast.xml',
+        'ITEM_PIPELINES': {'scrapy_podcast_rss.pipelines.PodcastPipeline': 300, }
+    }
+
+    def parse(self, response):
+        podcast_data_item = PodcastDataItem()
+        podcast_data_item['title'] = "Podcast title"
+        podcast_data_item['description'] = "Description of the podcast."
+        podcast_data_item['url'] = "Podcast's URL"
+        podcast_data_item['image_url'] = "https://live.staticflickr.com/4211/35400224382_9edcb984e5_c.jpg"  # Sample image
+        yield podcast_data_item
+
+        episode_item = PodcastEpisodeItem()
+        episode_item['title'] = "Episode title"
+        episode_item['description'] = "Episode description"
+        pub_date_tz = datetime.datetime.strptime("01/01/2020", "%m/%d/%Y").replace(tzinfo=pytz.UTC)
+        episode_item['publication_date'] = pub_date_tz  # Publication date NEEDS to have a TIME ZONE.
+        episode_item['guid'] = "Episode guid"  # Simulated identifier.
+        episode_item['audio_url'] = "https://ia801803.us.archive.org/13/items/MOZARTSerenadeEineKleineNachtmusikK." \
+                                    "525-NEWTRANSFER01.I.Allegro/01.I.Allegro.mp3 "  # Sample audio url.
+        yield episode_item
+```
 
 ### Note on using S3 as storage
 To use S3 storage locations, you can install scrapy-podcast-rss by doing:
