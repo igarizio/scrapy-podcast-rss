@@ -17,9 +17,6 @@ class PodcastPipeline:
     This class takes PodcastEpisodeItems and at one PodcastDataItem,
     and depending on the URI defined in the settings, exports them using
     either PodcastToS3ItemExporter or PodcastToFileItemExporter.
-
-    The pipeline waits until the spider closes to sort the episodes and
-    send them to the exporter.
     """
 
     def __init__(self):
@@ -32,9 +29,7 @@ class PodcastPipeline:
         self._podcast_data_item = None
 
     def close_spider(self, spider):
-        """Sorts episodes and then exports them.
-        For the sorting, it uses the autoincremental variable episode_order
-        defined in PodcastEpisodeItem.
+        """Exports each item and closes the exporter.
 
         Args:
             spider: A spider.
@@ -42,8 +37,7 @@ class PodcastPipeline:
         exporter = self._get_exporter(spider)
         exporter.start_exporting()
 
-        sorted_items = sorted(self._episodes_item_list, key=lambda item: item['episode_order'])
-        for episode_item in sorted_items:
+        for episode_item in self._episodes_item_list:
             exporter.export_item(episode_item)
 
         exporter.finish_exporting()

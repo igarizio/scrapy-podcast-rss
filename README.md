@@ -52,7 +52,7 @@ You can find a minimal example of a spider using this package here:
 [scrapy-podcast-rss-example](https://github.com/igarizio/scrapy-podcast-rss-example).  
 You can also find an example of the package being used in an AWS Lambda function here: [scrapy-podcast-rss-serverless](https://github.com/igarizio/scrapy-podcast-rss-serverless).
 
-### Spider example:
+### Spider example
 ```python
 import datetime
 import scrapy
